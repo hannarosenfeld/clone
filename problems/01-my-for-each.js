@@ -7,7 +7,10 @@ Do not use the built in Array.forEach.
 *******************************************************************************/
 
 function myForEach(array, cb) {
-    // Your code here
+    for (let i = 0; i < array.length; i++) {
+        let ele = array[i];
+        cb(ele, i, array)
+    }
 }
 
 
@@ -23,6 +26,7 @@ myForEach(['laika', 'belka'], function (el) {
     test.push(el.toUpperCase());
 });
 console.log(test); // ['LAIKA', 'BELKA']
+
 /*****************DO NOT MODIFY ANYTHING UNDER THIS  LINE**********************/
 try {
     module.exports = myForEach;
