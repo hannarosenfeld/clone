@@ -36,14 +36,24 @@ console.log(selectiveMap([-10, 4, 7, 6, -2, -9], isPositive, square));
 // [-10, 16, 49, 36, -2, -9]
 
 AFTER YOU ARE FINISHED WITH THIS PROBLEM, ASK FOR A CODE REVIEW
-    (optional if you already asked a question for this problem.)
+(optional if you already asked a question for this problem.)
 - Explain how you are using both of the callbacks in the function.
 - What do you expect each callback function to be returning?
 - How many times are you calling each callback function?
 *******************************************************************************/
 
 function selectiveMap(array, selector, mapper) {
-    // Your code here
+    let newArr = [];
+
+    for (let el of array) {
+        if (selector(el)) {
+            newArr.push(mapper(el));
+        } else {
+            newArr.push(el);
+        }
+    }
+
+    return newArr;
 }
 
 /*****************DO NOT MODIFY ANYTHING UNDER THIS  LINE**********************/
