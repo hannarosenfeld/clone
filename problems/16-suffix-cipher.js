@@ -1,13 +1,28 @@
 /*******************************************************************************
 Write a function `suffixCipher` that accepts a sentence and object as arguments.
-The object contains suffixes as keys and callbacks as values. The `suffixCipher`
-function should return a new sentence where words of the original sentence are
-modified according to the callback that corresponds with the suffix that the word
-ends with. If the word does not end in any of the suffix keys, then it should not
-be modified. You can assume that only one suffix of the object will match a word.
+
+The object contains suffixes as keys and callbacks as values.
+
+The `suffixCipher` function should return a new sentence where words of the original sentence are modified according to the callback that corresponds with the suffix that the word ends with.
+
+If the word does not end in any of the suffix keys, then it should not be modified.
+
+You can assume that only one suffix of the object will match a word.
 
 Examples:
 
+
+let cipher2 = {
+    tal: function(word) {
+        return word.toUpperCase();
+    },
+    s: function(word) {
+      return word + 'th';
+    }
+  };
+console.log(suffixCipher('incremental progress is very instrumental', cipher2));
+// INCREMENTAL progressth isth very INSTRUMENTAL
+*******************************************************************************/
 let cipher1 = {
     ly: function(word) {
         return word.slice(0, -1) + 'ee';
@@ -19,20 +34,36 @@ let cipher1 = {
 console.log(suffixCipher('quietly and gently visualize', cipher1));
 // quietlee and gentlee visualizer
 
-let cipher2 = {
-    tal: function(word) {
-        return word.toUpperCase();
-    },
-    s: function(word) {
-        return word + 'th';
-    }
-};
-console.log(suffixCipher('incremental progress is very instrumental', cipher2));
-// INCREMENTAL progressth isth very INSTRUMENTAL
-*******************************************************************************/
+// Input: sentence(str), cipher(obj)
+// Output: str => new sentence where words of original sentence are modified according to the callback that corresponds with the suffix that the word ends with.
+
+/*
+Plan:
+- create new arr to hold modified words
+- split sentence into arr of words
+- for each word:
+  - if word ends in a suffix
+    - key into cipher obj to get arr 
+    - reassign word to cb(word)
+  - push word to arr (if word doesn't end in suffix, pushes original word)
+- return new arr joined into new sentence
+*/
+
 
 function suffixCipher(sentence, cipher) {
-  // Your code here
+  let arr = [];
+
+  for (let word of sentence.split(' ')) {
+    for (let suffix in cipher) {
+      if (word.endsWith(suffix)) {
+        let cb = cipher[suffix];
+        word = cb(word);
+      }
+    }
+    arr.push(word);
+  }
+
+  return arr.join(' ');
 }
 
 /*****************DO NOT MODIFY ANYTHING UNDER THIS  LINE**********************/
